@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Categoría</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input placeholder="Nombre" formControlName="name" matInput type="text">
+              <div class="messages" *ngIf="nameField.touched && nameField.invalid">
+                <mat-error *ngIf="nameField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="nameField.hasError('minlength')">
+                  Debe tener minimo 3 carateres
+                </mat-error>
+                <mat-error *ngIf="nameField.hasError('not_available')">
+                  Este nombre ya esta siendo usado, por favor cambialo
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <img *ngIf="imageField.value" [src]="imageField.value">
+            <button (click)="uploadImage($event)" mat-fab color="primary"><mat-icon>insert_photo</mat-icon></button>
+            <input hidden (change)="uploadFile($event)" placeholder="Image" #fileInput type="file" id="file">
+              <div class="messages" *ngIf="imageField.touched && imageField.invalid">
+                <mat-error *ngIf="imageField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+          </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">
+        <span *ngIf="isNew">Crear Categoría</span>
+        <span *ngIf="!isNew">Editar Categoría</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>

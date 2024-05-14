@@ -1,0 +1,69 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="Title" formControlName="title" matInput type="text">
+            <div class="messages" *ngIf="titleField.touched && titleField.invalid">
+              <mat-error *ngIf="titleField.hasError('required')">
+                Este campo es requerido
+              </mat-error>
+              <mat-error *ngIf="titleField.hasError('minlength')">
+                Mínimo debe tener 4 caracteres.
+              </mat-error>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="Price" formControlName="price" matInput type="number">
+            <div *ngIf="priceField.errors && priceField.dirty">
+              <p *ngIf="priceField.hasError('price_invalid')">No te debes pasar de 10000</p>
+              <p *ngIf="priceField.hasError('required')">El campo es requerido</p>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <textarea placeholder="Description" formControlName="description" matInput></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <input type="file" (change)="uploadFile($event)" multiple>
+          <!-- Muestra previas de todas las imágenes cargadas -->
+          <div *ngFor="let image of images">
+            <img [src]="image" alt="Image preview" class="product-image">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Categorías</mat-label>
+            <mat-select formControlName="categoryId">
+              <mat-option [value]="category.id" *ngFor="let category of categories">{{ category.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <form [formGroup]="form">
+        <!-- otros campos -->
+        <app-stepper formControlName="stock"></app-stepper>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit">Guardar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

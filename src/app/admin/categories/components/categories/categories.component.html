@@ -1,0 +1,22 @@
+<a routerLink="create">Crear Categoria</a>
+<div class="categories">
+  <div *ngFor="let category of categories">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ category.name }}</mat-card-title>
+      </mat-card-header>
+      <div class="crop-image">
+        <img [src]="category.image" alt="{{ category.name }}" />
+      </div>
+      <mat-card-content>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis ullam quisquam totam, nobis, non
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" [routerLink]="['edit', category.id]">Editar</button>
+        <button mat-raised-button color="warn" (click)="deleteCategory(category)">Eliminar</button>
+        </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+.error {
+  color: darkred;
+  font-size: .8rem;
+}
+
+.messages {
+  opacity: 0;
+  transition: all 0.5s ease-in;
+  &.active {
+      opacity: 1;
+  }
+}
+input {
+
+  transition: background-color 0.5s ease-out;
+  &.is-invalid {
+      background: url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg") no-repeat 95% 50% rgb(233, 103, 39);
+      background-size: 25px;
+  }
+  &.is-valid {
+      background: url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg") no-repeat 95% 50% lightgreen;
+      background-size: 25px;
+  }
+}
+form{
+  mat-form-field{
+      width: 100%;
+      padding: .5rem  ;
+  }
+}
+mat-radio-button {
+  display: block;  /* Makes each radio button appear on a new line */
+  margin-bottom: 8px; /* Adds some space below each radio button */
+}
